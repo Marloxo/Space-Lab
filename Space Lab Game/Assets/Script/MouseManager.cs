@@ -26,8 +26,12 @@ public class MouseManager : MonoBehaviour
             {
                 Debug.Log("We hit: " + hitInfo.collider.gameObject.name);
                 // Now let's spawn new object
-                Vector3 spawnSpot = hitInfo.point;
-                Instantiate(prefabToSpawn, spawnSpot, Quaternion.identity);
+                if (hitInfo.collider.gameObject.tag == "box")
+                {
+                    Vector3 spawnSpot = hitInfo.point;
+                    Instantiate(prefabToSpawn, spawnSpot, Quaternion.identity);
+                }
+
             }
         }
     }
