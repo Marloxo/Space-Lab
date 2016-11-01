@@ -57,7 +57,7 @@ public class MoveCamera : MonoBehaviour
             Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 
             Vector3 move = new Vector3(pos.x * panSpeed, pos.y * panSpeed, 0);
-            transform.Translate(move, Space.Self);
+            transform.Translate(move, Space.Self);//The reason is because we want to pan the camera along a plane defined by the camera’s forward direction, not the world’s forward direction
         }
 
         // Move the camera linearly along Z axis
