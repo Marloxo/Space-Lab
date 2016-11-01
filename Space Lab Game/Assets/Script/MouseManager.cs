@@ -5,7 +5,6 @@ public class MouseManager : MonoBehaviour
     // public Camera theCamera = Camera.main;
     public Camera theCamera;
     public GameObject prefabToSpawn;
-    private float boxOffsetScale = 2.2f;
     private Vector3 spawnSpot;
     void Update()
     {//was the mouse pressed down this frame?
@@ -18,15 +17,14 @@ public class MouseManager : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo))
             {
                 Debug.Log("We hit: " + hitInfo.collider.gameObject.name);
-                // Now let's spawn new object
-                if (prefabToSpawn.tag == "box") //then add the box offset
-                    spawnSpot = hitInfo.collider.transform.position + (hitInfo.normal * boxOffsetScale);
-                else
-                    spawnSpot = hitInfo.collider.transform.position + hitInfo.normal;
 
-                Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.forward, hitInfo.normal);
+                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("SnapPoint"))
+                {// Now let's spawn new object
+                    spawnSpot = hitInfo.collider.transform.position;
+                    Quaternion spawnRotation = hitInfo.collider.transform.rotation;
 
-                Instantiate(prefabToSpawn, spawnSpot, spawnRotation);
+                    Instantiate(prefabToSpawn, spawnSpot, spawnRotation);
+                }
             }
         }
     }
