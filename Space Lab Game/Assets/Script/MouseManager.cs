@@ -23,7 +23,9 @@ public class MouseManager : MonoBehaviour
                     spawnSpot = hitInfo.collider.transform.position;
                     Quaternion spawnRotation = hitInfo.collider.transform.rotation;
 
-                    Instantiate(prefabToSpawn, spawnSpot, spawnRotation);
+                    GameObject go = (GameObject)Instantiate(prefabToSpawn, spawnSpot, spawnRotation);
+                    //attach the new object to other object which get hit
+                    go.transform.SetParent(hitInfo.collider.transform);
                 }
             }
         }
