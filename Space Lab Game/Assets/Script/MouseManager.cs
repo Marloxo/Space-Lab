@@ -26,8 +26,19 @@ public class MouseManager : MonoBehaviour
                     GameObject go = (GameObject)Instantiate(prefabToSpawn, spawnSpot, spawnRotation);
                     //attach the new object to other object which get hit
                     go.transform.SetParent(hitInfo.collider.transform);
+
+                    //Disable the renderer on SnapPoint while  something is attach to it
+                    hitInfo.collider.GetComponent<Renderer>().enabled = false;
+                    hitInfo.collider.GetComponent<Collider>().enabled = false;
                 }
             }
         }
+    }
+    void RemovePart(GameObject go)
+    { //just an example to re-enable the SnapPoint
+        go.transform.parent.GetComponent<Renderer>().enabled = true;
+        go.transform.parent.GetComponent<Collider>().enabled = true;
+
+        Destroy(go);
     }
 }
